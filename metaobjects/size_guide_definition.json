@@ -1,0 +1,48 @@
+{
+  "query": "mutation CreateSizeGuideDefinition($definition: MetaobjectDefinitionCreateInput!) { metaobjectDefinitionCreate(definition: $definition) { metaobjectDefinition { id type name } userErrors { field message } } }",
+  "variables": {
+    "definition": {
+      "type": "size_guide",
+      "name": "Size Guide",
+      "description": "Structured size chart CMS entry. Attach to product pages via metafield references.",
+      "displayNameKey": "category",
+      "access": {
+        "storefront": "PUBLIC_READ"
+      },
+      "fieldDefinitions": [
+        {
+          "key": "category",
+          "name": "Category",
+          "description": "Product category this guide applies to (e.g. Tops, Bottoms, Outerwear).",
+          "type": "single_line_text_field",
+          "required": true,
+          "validations": [
+            { "name": "min", "value": "1" },
+            { "name": "max", "value": "100" }
+          ]
+        },
+        {
+          "key": "size_chart",
+          "name": "Size Chart",
+          "description": "JSON object: { \"headers\": [\"Size\", \"Chest\", \"Waist\"], \"rows\": [[\"XS\", \"32\", \"26\"], ...] }. All measurements in inches.",
+          "type": "json",
+          "required": true
+        },
+        {
+          "key": "fit_notes",
+          "name": "Fit Notes",
+          "description": "Free-text notes about how the garment fits (e.g. \"Runs small — size up for a relaxed fit\").",
+          "type": "multi_line_text_field",
+          "required": false
+        },
+        {
+          "key": "model_info",
+          "name": "Model Info",
+          "description": "Model dimensions and size worn for reference photography (e.g. \"Model is 5'10\", 160 lbs, wearing size M\").",
+          "type": "single_line_text_field",
+          "required": false
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "query": "mutation CreateLookbookDefinition($definition: MetaobjectDefinitionCreateInput!) { metaobjectDefinitionCreate(definition: $definition) { metaobjectDefinition { id type name } userErrors { field message } } }",
+  "variables": {
+    "definition": {
+      "type": "lookbook",
+      "name": "Lookbook",
+      "description": "Editorial lookbook entry. Renders as a hero image + description + featured product grid.",
+      "displayNameKey": "title",
+      "access": {
+        "storefront": "PUBLIC_READ"
+      },
+      "fieldDefinitions": [
+        {
+          "key": "title",
+          "name": "Title",
+          "type": "single_line_text_field",
+          "required": true
+        },
+        {
+          "key": "hero_image",
+          "name": "Hero Image",
+          "description": "Primary editorial image displayed at the top of the lookbook card.",
+          "type": "file_reference",
+          "required": false,
+          "validations": [
+            { "name": "file_type_options", "value": "[\"Image\"]" }
+          ]
+        },
+        {
+          "key": "description",
+          "name": "Description",
+          "description": "Short editorial copy for the look.",
+          "type": "rich_text_field",
+          "required": false
+        },
+        {
+          "key": "products",
+          "name": "Featured Products",
+          "description": "Products shown in this look. Up to 6.",
+          "type": "list.product_reference",
+          "required": false,
+          "validations": [
+            { "name": "max", "value": "6" }
+          ]
+        },
+        {
+          "key": "published_at",
+          "name": "Published Date",
+          "description": "Date this look was published. Used for display and sorting.",
+          "type": "date",
+          "required": false
+        }
+      ]
+    }
+  }
+}

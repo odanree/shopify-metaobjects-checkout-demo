@@ -1,0 +1,46 @@
+{
+  "sections": {
+    "hero": {
+      "type": "image-banner",
+      "settings": {
+        "image": "",
+        "heading": "New Collection",
+        "subheading": "Explore the latest looks",
+        "button_label": "Shop Now",
+        "button_url": "/collections/all"
+      }
+    },
+    "lookbook": {
+      "type": "lookbook",
+      "blocks": {
+        "entry-1": {
+          "type": "lookbook_entry",
+          "settings": {
+            "lookbook_entry": ""
+          }
+        },
+        "entry-2": {
+          "type": "lookbook_entry",
+          "settings": {
+            "lookbook_entry": ""
+          }
+        }
+      },
+      "block_order": ["entry-1", "entry-2"],
+      "settings": {
+        "heading": "The Lookbook",
+        "subheading": "Explore curated collections",
+        "background_color": "#f9f9f9",
+        "text_color": "#1a1a1a"
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Best Sellers",
+        "collection": ""
+      }
+    }
+  },
+  "order": ["hero", "lookbook", "featured-collection"]
+}

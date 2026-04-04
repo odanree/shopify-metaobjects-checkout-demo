@@ -1,0 +1,56 @@
+{% comment %}
+  Reusable size guide snippet. Renders a size chart table from a size_guide metaobject.
+  Parameters:
+    - metaobject {Object} — the size_guide metaobject entry
+    - show_heading {Boolean} — whether to render an h3 heading (default true)
+{% endcomment %}
+
+{%- liquid
+  assign show_heading = show_heading | default: true
+  assign category     = metaobject.field('category').value
+  assign chart_json   = metaobject.field('size_chart').value
+  assign fit_notes    = metaobject.field('fit_notes').value
+  assign model_info   = metaobject.field('model_info').value
+  assign chart        = chart_json | parse_json
+-%}
+
+<div class="sg-snippet">
+  {%- if show_heading and category != blank -%}
+    <h3 class="sg-snippet__heading">{{ category }} Size Guide</h3>
+  {%- endif -%}
+
+  {%- if chart != blank and chart.headers.size > 0 -%}
+    <div class="sg-snippet__table-wrap">
+      <table class="sg-snippet__table">
+        <thead>
+          <tr>
+            {%- for header in chart.headers -%}
+              <th>{{ header }}</th>
+            {%- endfor -%}
+          </tr>
+        </thead>
+        <tbody>
+          {%- for row in chart.rows -%}
+            <tr>
+              {%- for cell in row -%}
+                {%- if forloop.first -%}
+                  <th scope="row">{{ cell }}</th>
+                {%- else -%}
+                  <td>{{ cell }}</td>
+                {%- endif -%}
+              {%- endfor -%}
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+  {%- endif -%}
+
+  {%- if model_info != blank -%}
+    <p class="sg-snippet__model">{{ model_info }}</p>
+  {%- endif -%}
+
+  {%- if fit_notes != blank -%}
+    <p class="sg-snippet__notes">{{ fit_notes | newline_to_br }}</p>
+  {%- endif -%}
+</div>

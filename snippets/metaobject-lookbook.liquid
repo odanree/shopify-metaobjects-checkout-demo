@@ -1,0 +1,185 @@
+{% comment %}
+  Renders a single lookbook metaobject card.
+  Parameters:
+    - metaobject {Object} — the lookbook metaobject entry
+    - block {Block} — the section block (for shopify_attributes)
+{% endcomment %}
+
+{%- liquid
+  assign title       = metaobject.field('title').value
+  assign hero_image  = metaobject.field('hero_image').value
+  assign description = metaobject.field('description').value
+  assign products    = metaobject.field('products').value
+  assign published   = metaobject.field('published_at').value
+-%}
+
+<article
+  class="lookbook-card"
+  {{ block.shopify_attributes }}
+>
+  {%- if hero_image != blank -%}
+    <div class="lookbook-card__image-wrap">
+      {{
+        hero_image
+        | image_url: width: 800
+        | image_tag:
+          loading: 'lazy',
+          class: 'lookbook-card__image',
+          alt: title | escape,
+          widths: '400, 600, 800',
+          sizes: '(max-width: 640px) 100vw, 400px'
+      }}
+    </div>
+  {%- endif -%}
+
+  <div class="lookbook-card__body">
+    {%- if title != blank -%}
+      <h3 class="lookbook-card__title">{{ title }}</h3>
+    {%- endif -%}
+
+    {%- if published != blank -%}
+      <time class="lookbook-card__date" datetime="{{ published }}">
+        {{ published | date: '%B %Y' }}
+      </time>
+    {%- endif -%}
+
+    {%- if description != blank -%}
+      <div class="lookbook-card__description">
+        {{ description }}
+      </div>
+    {%- endif -%}
+
+    {%- if products != blank and products.size > 0 -%}
+      <div class="lookbook-card__products">
+        <p class="lookbook-card__products-label">Featured in this look</p>
+        <ul class="lookbook-card__product-list">
+          {%- for product in products -%}
+            <li class="lookbook-card__product-item">
+              <a
+                href="{{ product.url }}"
+                class="lookbook-card__product-link"
+                aria-label="{{ product.title | escape }}"
+              >
+                {%- if product.featured_image != blank -%}
+                  {{
+                    product.featured_image
+                    | image_url: width: 80
+                    | image_tag:
+                      class: 'lookbook-card__product-thumb',
+                      alt: product.title | escape,
+                      loading: 'lazy'
+                  }}
+                {%- endif -%}
+                <span class="lookbook-card__product-title">{{ product.title }}</span>
+                <span class="lookbook-card__product-price">
+                  {{ product.price_min | money }}
+                </span>
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+  </div>
+</article>
+
+<style>
+  .lookbook-card {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.2s;
+  }
+  .lookbook-card:hover {
+    box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+  }
+  .lookbook-card__image-wrap {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+  }
+  .lookbook-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .lookbook-card:hover .lookbook-card__image {
+    transform: scale(1.03);
+  }
+  .lookbook-card__body {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .lookbook-card__title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0;
+  }
+  .lookbook-card__date {
+    font-size: 0.8rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .lookbook-card__description {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #444;
+  }
+  .lookbook-card__products {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid #eee;
+  }
+  .lookbook-card__products-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #999;
+    margin: 0 0 10px;
+  }
+  .lookbook-card__product-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .lookbook-card__product-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+    padding: 6px;
+    border-radius: 6px;
+    transition: background 0.15s;
+  }
+  .lookbook-card__product-link:hover {
+    background: #f5f5f5;
+  }
+  .lookbook-card__product-thumb {
+    width: 44px;
+    height: 44px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .lookbook-card__product-title {
+    flex: 1;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  .lookbook-card__product-price {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #333;
+  }
+</style>

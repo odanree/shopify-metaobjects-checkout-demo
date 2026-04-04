@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="{{ settings.accent_color }}" />
+
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; tagged &ldquo;{{ current_tags | join: ', ' }}&rdquo;{% endif %}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+    </title>
+
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}" />
+    {%- endif -%}
+
+    {{ content_for_header }}
+
+    {%- liquid
+      assign body_font = settings.body_font
+      assign heading_font = settings.heading_font
+    -%}
+    {{ body_font | font_face: font_display: 'swap' }}
+    {{ heading_font | font_face: font_display: 'swap' }}
+
+    <style>
+      :root {
+        --color-background: {{ settings.color_background }};
+        --color-foreground: {{ settings.color_foreground }};
+        --color-accent: {{ settings.accent_color }};
+        --font-body: {{ body_font.family }}, {{ body_font.fallback_families }};
+        --font-heading: {{ heading_font.family }}, {{ heading_font.fallback_families }};
+        --font-body-weight: {{ body_font.weight }};
+        --font-heading-weight: {{ heading_font.weight }};
+      }
+
+      *, *::before, *::after { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        background-color: var(--color-background);
+        color: var(--color-foreground);
+        font-family: var(--font-body);
+        font-weight: var(--font-body-weight);
+        font-size: 16px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-heading);
+        font-weight: var(--font-heading-weight);
+        line-height: 1.2;
+      }
+
+      a { color: var(--color-accent); }
+      img { max-width: 100%; height: auto; display: block; }
+
+      .skip-to-content {
+        position: absolute;
+        top: -100%;
+        left: 0;
+        padding: 8px 16px;
+        background: var(--color-accent);
+        color: #fff;
+        font-weight: 600;
+        z-index: 9999;
+        transition: top 0.2s;
+      }
+      .skip-to-content:focus { top: 0; }
+    </style>
+  </head>
+
+  <body>
+    <a href="#MainContent" class="skip-to-content">Skip to content</a>
+
+    {%- section 'header' -%}
+
+    <main id="MainContent" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    {%- section 'footer' -%}
+  </body>
+</html>

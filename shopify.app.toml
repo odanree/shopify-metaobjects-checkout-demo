@@ -1,0 +1,22 @@
+name = "metaobjects-checkout-demo"
+client_id = "YOUR_CLIENT_ID"
+application_url = "https://your-app-url.ngrok.io"
+embedded = true
+
+[access_scopes]
+scopes = "read_products,write_products,read_metaobjects,write_metaobjects,read_customers,read_orders,write_orders"
+
+[auth]
+redirect_urls = [
+  "https://your-app-url.ngrok.io/api/auth/callback"
+]
+
+[webhooks]
+api_version = "2024-01"
+
+  [[webhooks.subscriptions]]
+  topics = ["orders/create", "products/update"]
+  uri = "/api/webhooks"
+
+[pos]
+embedded = false

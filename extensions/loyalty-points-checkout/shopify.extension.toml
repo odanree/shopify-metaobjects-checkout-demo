@@ -1,0 +1,21 @@
+api_version = "2024-01"
+
+[[extensions]]
+type = "ui_extension"
+name = "Loyalty Points at Checkout"
+handle = "loyalty-points-checkout"
+
+  [[extensions.targeting]]
+  module = "./src/index.tsx"
+  target = "purchase.checkout.block.render"
+
+[settings]
+  [[settings.fields]]
+  key = "points_per_dollar"
+  type = "number_integer"
+  name = "Points earned per dollar spent"
+
+  [[settings.fields]]
+  key = "redemption_rate"
+  type = "number_integer"
+  name = "Points per $1 redemption value (e.g. 100 = 100pts/$1)"

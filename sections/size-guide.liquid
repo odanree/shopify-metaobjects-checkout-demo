@@ -1,0 +1,171 @@
+{% comment %}
+  Size Guide Section — renders a size chart from a "size_guide" metaobject.
+  Metaobject fields:
+    - category (single_line_text_field): e.g. "Tops", "Bottoms"
+    - size_chart (json): { "headers": ["Size","Chest","Waist","Hip"], "rows": [["XS","32","26","35"],...] }
+    - fit_notes (multi_line_text_field)
+    - model_info (single_line_text_field): e.g. "Model is 5'10\" wearing size M"
+{% endcomment %}
+
+{%- assign guide = section.settings.size_guide_entry -%}
+
+{%- if guide == blank -%}
+  {%- if request.design_mode -%}
+    <div class="size-guide size-guide--placeholder">
+      <p>Select a Size Guide metaobject in the customizer to display it here.</p>
+    </div>
+  {%- endif -%}
+{%- else -%}
+  {%- assign category   = guide.field('category').value -%}
+  {%- assign chart_json = guide.field('size_chart').value -%}
+  {%- assign fit_notes  = guide.field('fit_notes').value -%}
+  {%- assign model_info = guide.field('model_info').value -%}
+  {%- assign chart      = chart_json | parse_json -%}
+
+  <section
+    class="size-guide"
+    id="shopify-section-{{ section.id }}"
+    aria-label="{{ category | escape }} Size Guide"
+  >
+    <div class="size-guide__inner">
+      {%- if section.settings.show_heading -%}
+        <h2 class="size-guide__heading">
+          {{ category }} Size Guide
+        </h2>
+      {%- endif -%}
+
+      {%- if chart != blank and chart.headers != blank -%}
+        <div class="size-guide__table-wrap">
+          <table class="size-guide__table" role="table">
+            <thead>
+              <tr>
+                {%- for header in chart.headers -%}
+                  <th scope="col">{{ header }}</th>
+                {%- endfor -%}
+              </tr>
+            </thead>
+            <tbody>
+              {%- for row in chart.rows -%}
+                <tr>
+                  {%- for cell in row -%}
+                    {%- if forloop.first -%}
+                      <th scope="row">{{ cell }}</th>
+                    {%- else -%}
+                      <td>{{ cell }}</td>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </tr>
+              {%- endfor -%}
+            </tbody>
+          </table>
+        </div>
+      {%- endif -%}
+
+      {%- if model_info != blank -%}
+        <p class="size-guide__model-info">{{ model_info }}</p>
+      {%- endif -%}
+
+      {%- if fit_notes != blank -%}
+        <div class="size-guide__fit-notes">
+          <h3>Fit Notes</h3>
+          <p>{{ fit_notes | newline_to_br }}</p>
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+{%- endif -%}
+
+<style>
+  .size-guide {
+    padding: 40px 20px;
+    font-family: inherit;
+  }
+  .size-guide__inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .size-guide__heading {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+  .size-guide__table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .size-guide__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  .size-guide__table th,
+  .size-guide__table td {
+    padding: 10px 16px;
+    text-align: left;
+    border-bottom: 1px solid #e5e5e5;
+    white-space: nowrap;
+  }
+  .size-guide__table thead th {
+    background: #f5f5f5;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .size-guide__table tbody tr:hover td,
+  .size-guide__table tbody tr:hover th {
+    background: #fafafa;
+  }
+  .size-guide__model-info {
+    margin-top: 16px;
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+  }
+  .size-guide__fit-notes {
+    margin-top: 24px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 6px;
+  }
+  .size-guide__fit-notes h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 8px;
+  }
+  .size-guide--placeholder {
+    text-align: center;
+    padding: 60px 20px;
+    background: #f5f5f5;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    color: #999;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Size Guide",
+  "tag": "section",
+  "class": "section-size-guide",
+  "settings": [
+    {
+      "type": "metaobject",
+      "id": "size_guide_entry",
+      "label": "Size guide",
+      "metaobject_type": "size_guide"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_heading",
+      "label": "Show heading",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Size Guide"
+    }
+  ]
+}
+{% endschema %}

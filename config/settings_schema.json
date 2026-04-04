@@ -1,0 +1,90 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Metaobjects Checkout Demo",
+    "theme_version": "1.0.0",
+    "theme_author": "Your Brand",
+    "theme_documentation_url": "https://github.com/your-org/shopify-metaobjects-checkout-demo",
+    "theme_support_url": "https://github.com/your-org/shopify-metaobjects-checkout-demo/issues"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Background color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_foreground",
+        "label": "Text color",
+        "default": "#1a1a1a"
+      },
+      {
+        "type": "color",
+        "id": "accent_color",
+        "label": "Accent / link color",
+        "default": "#000000"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "body_font",
+        "label": "Body font",
+        "default": "inter_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "heading_font",
+        "label": "Heading font",
+        "default": "inter_n7"
+      }
+    ]
+  },
+  {
+    "name": "Logo",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "min": 60,
+        "max": 300,
+        "step": 10,
+        "unit": "px",
+        "label": "Logo width",
+        "default": 120
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok_link",
+        "label": "TikTok URL"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_link",
+        "label": "X / Twitter URL"
+      }
+    ]
+  }
+]

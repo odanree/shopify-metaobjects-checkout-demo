@@ -1,0 +1,71 @@
+{
+  "comment": "Run create-metaobject-definitions.js first to create the type definitions, then seed these entries via the Admin API.",
+  "entries": [
+    {
+      "type": "size_guide",
+      "handle": "tops-size-guide",
+      "fields": [
+        {
+          "key": "category",
+          "value": "Tops"
+        },
+        {
+          "key": "size_chart",
+          "value": "{\"headers\":[\"Size\",\"Chest (in)\",\"Waist (in)\",\"Shoulder (in)\"],\"rows\":[[\"XS\",\"32-34\",\"26-28\",\"15\"],[\"S\",\"35-37\",\"29-31\",\"16\"],[\"M\",\"38-40\",\"32-34\",\"17\"],[\"L\",\"41-43\",\"35-37\",\"18\"],[\"XL\",\"44-46\",\"38-40\",\"19\"],[\"XXL\",\"47-49\",\"41-43\",\"20\"]]}"
+        },
+        {
+          "key": "fit_notes",
+          "value": "Our tops are cut with a slightly relaxed fit through the chest and a tapered waist. If you're between sizes, size up for a more relaxed silhouette or size down for a closer fit. Stretch fabric blends have approximately 3% ease."
+        },
+        {
+          "key": "model_info",
+          "value": "Model is 6'0\", 175 lbs, wearing size M"
+        }
+      ]
+    },
+    {
+      "type": "size_guide",
+      "handle": "bottoms-size-guide",
+      "fields": [
+        {
+          "key": "category",
+          "value": "Bottoms"
+        },
+        {
+          "key": "size_chart",
+          "value": "{\"headers\":[\"Size\",\"Waist (in)\",\"Hip (in)\",\"Inseam (in)\"],\"rows\":[[\"XS / 26\",\"26-27\",\"34-35\",\"30\"],[\"S / 28\",\"28-29\",\"36-37\",\"30\"],[\"M / 30\",\"30-31\",\"38-39\",\"31\"],[\"L / 32\",\"32-33\",\"40-41\",\"31\"],[\"XL / 34\",\"34-35\",\"42-43\",\"32\"],[\"XXL / 36\",\"36-37\",\"44-45\",\"32\"]]}"
+        },
+        {
+          "key": "fit_notes",
+          "value": "Slim through the hip and thigh with a tapered leg opening. Measurements are for our standard 30\" inseam. Tall and Short inseam lengths available on select styles."
+        },
+        {
+          "key": "model_info",
+          "value": "Model is 6'0\", 175 lbs, wearing size 32 / M"
+        }
+      ]
+    },
+    {
+      "type": "size_guide",
+      "handle": "outerwear-size-guide",
+      "fields": [
+        {
+          "key": "category",
+          "value": "Outerwear"
+        },
+        {
+          "key": "size_chart",
+          "value": "{\"headers\":[\"Size\",\"Chest (in)\",\"Sleeve (in)\",\"Back Length (in)\"],\"rows\":[[\"XS\",\"35-37\",\"32\",\"27\"],[\"S\",\"38-40\",\"33\",\"28\"],[\"M\",\"41-43\",\"34\",\"29\"],[\"L\",\"44-46\",\"35\",\"30\"],[\"XL\",\"47-49\",\"36\",\"31\"],[\"XXL\",\"50-52\",\"37\",\"32\"]]}"
+        },
+        {
+          "key": "fit_notes",
+          "value": "Outerwear is cut with extra room (approx. 2\") over our tops sizing to layer comfortably. If you typically wear a medium top, a medium jacket will fit over a lightweight layer. For heavy layering, size up one."
+        },
+        {
+          "key": "model_info",
+          "value": "Model is 6'0\", 175 lbs, wearing size M over a T-shirt"
+        }
+      ]
+    }
+  ]
+}
