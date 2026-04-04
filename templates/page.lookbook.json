@@ -1,0 +1,47 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_title": true
+      }
+    },
+    "lookbook": {
+      "type": "lookbook",
+      "blocks": {
+        "entry-1": {
+          "type": "lookbook_entry",
+          "settings": {
+            "lookbook_entry": ""
+          }
+        },
+        "entry-2": {
+          "type": "lookbook_entry",
+          "settings": {
+            "lookbook_entry": ""
+          }
+        },
+        "entry-3": {
+          "type": "lookbook_entry",
+          "settings": {
+            "lookbook_entry": ""
+          }
+        },
+        "entry-4": {
+          "type": "lookbook_entry",
+          "settings": {
+            "lookbook_entry": ""
+          }
+        }
+      },
+      "block_order": ["entry-1", "entry-2", "entry-3", "entry-4"],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "background_color": "#ffffff",
+        "text_color": "#1a1a1a"
+      }
+    }
+  },
+  "order": ["main", "lookbook"]
+}

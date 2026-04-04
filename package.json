@@ -7,7 +7,8 @@
     "build": "shopify app build",
     "deploy": "shopify app deploy",
     "generate": "shopify app generate",
-    "setup-metaobjects": "node scripts/create-metaobject-definitions.js"
+    "setup-metaobjects": "node scripts/create-metaobject-definitions.js",
+    "webhook-server": "node app/server.js"
   },
   "workspaces": [
     "extensions/*"
